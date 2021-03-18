@@ -1,22 +1,35 @@
 .App {
   width: 100%;
   height: 100%;
-  background-color: #282c34;
-
+  background-color: #fff;
 }
 
-.header {
-  border: 1px solid red;
-  height: 100px;
+.sidebar {
+  position: fixed;
+  width: 250px;
+  height: 100%;
+  color: #fff;
+  background-color: #7429DB;
+  z-index: 1;
 }
-.header .title {
-  margin: auto;
-  width: 500px;
+.sidebar .header {
+  font-size: 27px;
+  font-weight: bold;
   text-align: center;
-  border: 1px solid blue;
+  padding-top: 10px;
+}
+
+.top-nav {
+  position: fixed;
+  width: 100%;
+  height: 60px;
+  padding-left: 250px;
+  border-bottom: 1px solid #d0d0d0;
 }
 
 .content {
+  padding-left: 250px;
+  padding-top: 60px;
   border: 1px solid red;
   height: 800px;
 }
