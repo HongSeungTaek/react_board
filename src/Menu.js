@@ -7,7 +7,7 @@ function MenuList() {
   return (
     <ul>
       {menuList.map(item => (
-        <MenuItem menu={item} key={item.menuId}/>
+        <MenuItem menu={item} key={item.id}/>
       ))}
     </ul>
   );
