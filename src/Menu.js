@@ -1,10 +1,8 @@
+import Const from './Const';
+
 function MenuList() {
-  const menuList = [
-    {
-      'id': 1,
-      'name': '게시판'
-    }
-  ];
+  let menuList = [];
+  menuList = Const.MENU_LIST;
 
   return (
     <ul>
