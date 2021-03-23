@@ -1,28 +1,21 @@
-import {useState} from 'react';
+import {useState, useEffect} from 'react';
 import axios from 'axios';
 
 import Const from './Const';
+import CommonUtil from './CommonUtil';
 
 function BoardList() {
   const [page, setPage] = useState(1);
+  const [totalCnt, setTotalCnt] = useState(0);
   const [pageCnt, setPageCnt] = useState(10);
-  const [pagiNation, setPagiNation] = useState([1]);
-  const [list, setList] = useState([
-    {
-      boardId: 11,
-      content: "-",
-      insertDate: "-",
-      title: "-"
-    },
-    {
-      boardId: 22,
-      content: "-",
-      insertDate: "-",
-      title: "-"
-    }
-  ]);
+  const [pagiNation, setPagiNation] = useState({
+    'prev': false,
+    'list': [],
+    'next': false
+  });
+  const [list, setList] = useState([]);
 
-  async function fnSearch() {
+  const fnSearch = async () => {
     let param = {
       'page': page,
       'pageCnt': pageCnt,
@@ -30,22 +23,27 @@ function BoardList() {
     };
     const response = await axios.post('board/list', param);
     setList(response.data.list);
+    setTotalCnt(response.data.totalCnt);
+    
+    let _pagination = CommonUtil.createPagination(page, response.data.totalCnt, pageCnt);
+    setPagiNation(_pagination);
+  };
 
-    let totalCnt = response.data.totalCnt;
-    //setPagiNation();
-  }
+  useEffect(()=>{
+    fnSearch();
+  }, [page]);
 
-  function changePageCnt(e) {
-    setPageCnt(parseInt(e.target.value));
-  }
 
+  console.log("render=>"+page);
   return (
     <>
+    page: {page} / totalCnt: {totalCnt} / pageCnt: {pageCnt} / pagiNation: ({pagiNation.prev?1:-1}){pagiNation.list}({pagiNation.next?1:-1})
+    <br/>
     <button className="btn" onClick={fnSearch}>조회</button>
     {/* 아래 select 따로 빼기 예정 */}
-    <select onChange={changePageCnt}>
+    <select onChange={(e) => setPageCnt(parseInt(e.target.value))}>
       {Const.PAGE_COUNT.map(item => (
-        <option value={item}>{item}</option>
+        <option key={item} value={item}>{item}</option>
       ))}
     </select>
     <table>
@@ -63,8 +61,7 @@ function BoardList() {
         ))}
       </tbody>
     </table>
-    {/* 페이지네이션 구현 예정 */}
-    {/* <PagiNation pagiNation={pagiNation}/> */}
+    <PagiNation pagiNation={pagiNation} setPage={setPage}/>
     </>
   );
 }
@@ -80,12 +77,16 @@ function BoardItem({data}) {
   );
 }
 
-function PagiNation({pagiNation}) {
+function PagiNation({pagiNation, setPage}) {
   return (
     <ul>
-      {pagiNation.map(item => (
-        <li key={item}><a>{item}</a></li>
+      {pagiNation.prev && <li onClick={()=>setPage(pagiNation.prevValue)}><a href="#!">prev</a></li>}
+      
+      {pagiNation.list.map(item => (
+        <li key={item} onClick={()=>setPage(item)}><a href="#!">{item}</a></li>
       ))}
+      
+      {pagiNation.next && <li onClick={()=>setPage(pagiNation.nextValue)}><a href="#!">next</a></li>}
     </ul>
   );
 }
