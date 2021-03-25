@@ -5,4 +5,4 @@
 React Hooks + axios + bootstrap
 
 #백엔드 서버
-Spring boot + maven
+Spring boot + maven + mybatis + mariadb
