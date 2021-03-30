@@ -4,5 +4,5 @@
 # 사용 기술
 React Hooks + axios + bootstrap
 
-#백엔드 서버
+# 백엔드 서버
 Spring boot + maven + mybatis + mariadb
