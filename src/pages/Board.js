@@ -1,10 +1,10 @@
 import {useState, useEffect} from 'react';
 import axios from 'axios';
 
-import Const from './Const';
-import CommonUtil from './CommonUtil';
+import Const from '../Const';
+import CommonUtil from '../CommonUtil';
 
-function BoardList() {
+function Board() {
   const [page, setPage] = useState(1);
   const [totalCnt, setTotalCnt] = useState(0);
   const [pageCnt, setPageCnt] = useState(10);
@@ -22,6 +22,7 @@ function BoardList() {
       'offset': (page-1) * pageCnt
     };
     const response = await axios.post('board/list', param);
+    console.log(response);
     setList(response.data.list);
     setTotalCnt(response.data.totalCnt);
     
@@ -91,4 +92,4 @@ function PagiNation({pagiNation, setPage}) {
   );
 }
 
-export default BoardList;
+export default Board;

@@ -1,7 +1,9 @@
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import React, { Component } from 'react';
+import { Route } from 'react-router-dom';
 
-import BoardList from './Board';
+import { Board } from './pages';
 import MenuList from './Menu';
 import axios from 'axios';
 
@@ -39,7 +41,7 @@ function Content() {
   return (
     <div className="content">
       <div className="list">
-        <BoardList/>
+        <Route path="/" component={Board}/>
       </div>
     </div>
   );
