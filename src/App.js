@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 
-import { Board } from './pages';
+import { Board, Editor } from './pages';
 import MenuList from './Menu';
 import axios from 'axios';
 
@@ -41,7 +41,8 @@ function Content() {
   return (
     <div className="content">
       <div className="list">
-        <Route path="/" component={Board}/>
+        <Route exact path="/" component={Board}/>
+        <Route path="/editor" component={Editor}/>
       </div>
     </div>
   );

@@ -1,4 +1,5 @@
 import {useState, useEffect} from 'react';
+import { Route, Link } from 'react-router-dom';
 import axios from 'axios';
 
 import Const from '../Const';
@@ -38,9 +39,10 @@ function Board() {
   console.log("render=>"+page);
   return (
     <>
-    page: {page} / totalCnt: {totalCnt} / pageCnt: {pageCnt} / pagiNation: ({pagiNation.prev?1:-1}){pagiNation.list}({pagiNation.next?1:-1})
-    <br/>
+    {/* page: {page} / totalCnt: {totalCnt} / pageCnt: {pageCnt} / pagiNation: ({pagiNation.prev?1:-1}){pagiNation.list}({pagiNation.next?1:-1})
+    <br/> */}
     <button className="btn" onClick={fnSearch}>조회</button>
+    <Link to="/editor">글쓰기</Link>
     {/* 아래 select 따로 빼기 예정 */}
     <select onChange={(e) => setPageCnt(parseInt(e.target.value))}>
       {Const.PAGE_COUNT.map(item => (
