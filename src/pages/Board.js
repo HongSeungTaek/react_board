@@ -35,8 +35,6 @@ function Board() {
     fnSearch();
   }, [page]);
 
-
-  console.log("render=>"+page);
   return (
     <>
     {/* page: {page} / totalCnt: {totalCnt} / pageCnt: {pageCnt} / pagiNation: ({pagiNation.prev?1:-1}){pagiNation.list}({pagiNation.next?1:-1})
