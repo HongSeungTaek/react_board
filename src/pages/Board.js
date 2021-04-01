@@ -5,7 +5,7 @@ import axios from 'axios';
 import Const from '../Const';
 import CommonUtil from '../CommonUtil';
 
-function Board() {
+function Board({history}) {
   const [page, setPage] = useState(1);
   const [totalCnt, setTotalCnt] = useState(0);
   const [pageCnt, setPageCnt] = useState(10);
@@ -22,14 +22,19 @@ function Board() {
       'pageCnt': pageCnt,
       'offset': (page-1) * pageCnt
     };
+
     const response = await axios.post('board/list', param);
-    console.log(response);
+
     setList(response.data.list);
     setTotalCnt(response.data.totalCnt);
     
     let _pagination = CommonUtil.createPagination(page, response.data.totalCnt, pageCnt);
     setPagiNation(_pagination);
   };
+
+  const fnDetail = (boardId) => {
+    history.push('/detail/'+boardId);
+  }
 
   useEffect(()=>{
     fnSearch();
@@ -58,7 +63,7 @@ function Board() {
       </thead>
       <tbody>
         {list.map(item => (
-          <BoardItem data={item} key={item.boardId}/>
+          <BoardItem data={item} fnDetail={fnDetail} key={item.boardId}/>
         ))}
       </tbody>
     </table>
@@ -67,9 +72,9 @@ function Board() {
   );
 }
 
-function BoardItem({data}) {
+function BoardItem({data,fnDetail}) {
   return (
-    <tr>
+    <tr onClick={() => fnDetail(data.boardId)}>
       <td>{data.boardId}</td>
       <td>{data.title}</td>
       <td>{data.content}</td>
