@@ -28,10 +28,10 @@ function Editor({ location, history }) {
       <Link to="/">뒤로가기</Link>
       <div>
         <div>
-          제목 <input type="text" value={title} onChange={({ target: { value }}) => setTitle(value) }/>
+          제목: <input type="text" value={title} onChange={({ target: { value }}) => setTitle(value) }/>
         </div>
         <div>
-          내용 <textarea value={content} onChange={({ target: { value }}) => setContent(value) }/>
+          내용: <textarea value={content} onChange={({ target: { value }}) => setContent(value) }/>
         </div>
         <button onClick={fnAdd}>등록</button>
       </div>
