@@ -42,7 +42,10 @@ function Detail() {
           ?content
           :<textarea value={content} onChange={({ target: { value }}) => setContent(value) }/>}
         </div>
-        <button onClick={fnMod}>수정</button>
+        {pageType == 'D'
+        ?<button onClick={fnMod}>수정</button>
+        :<button>취소</button>
+        }
       </div>
     </div>
   );
