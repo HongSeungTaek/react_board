@@ -12,17 +12,29 @@ function Detail() {
   const [content, setContent] = useState('');
   let detail = {};
 
-  axios.get('board/'+boardId).then(function(res) {
-    setTitle(res.data.data.title);
-    setContent(res.data.data.content);
-    detail = {
-      'title': title,
-      'content': content
-    }
+  const getOne = () => {
+    axios.get('board/'+boardId).then(function(res) {
+      setTitle(res.data.data.title);
+      setContent(res.data.data.content);
+      detail = {
+        'title': title,
+        'content': content
+      }
+    });
+  }
+
+  getOne();
+  useEffect(() => {
+    console.log(11);
   });
 
   const fnMod = () => {
     setPageType('M');
+  }
+
+  const fnCancel = () => {
+    setPageType('D');
+    getOne();
   }
 
   return(
@@ -44,7 +56,7 @@ function Detail() {
         </div>
         {pageType == 'D'
         ?<button onClick={fnMod}>수정</button>
-        :<button>취소</button>
+        :<button onClick={fnCancel}>취소</button>
         }
       </div>
     </div>
