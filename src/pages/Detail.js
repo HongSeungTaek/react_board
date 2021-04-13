@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import Const from '../Const';
 import CommonUtil from '../CommonUtil';
+import Reply from '../component/Reply';
 
 function Detail({ location, history }) {
   let { boardId } = useParams();
@@ -11,6 +12,19 @@ function Detail({ location, history }) {
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
   let detail = {};
+
+  const [reply, setReply] = useState([
+    {
+      'replyId': 1,
+      'content': '댓글1',
+      'dateTime': '2021-04-13 12:13:00'
+    },
+    {
+      'replyId': 2,
+      'content': '댓글2',
+      'dateTime': '2021-04-13 12:13:00'
+    }
+  ]);
 
   const getOne = () => {
     axios.get('board/'+boardId).then(function(res) {
@@ -67,6 +81,10 @@ function Detail({ location, history }) {
         {pageType == 'D' && <button onClick={fnDelete}>삭제</button>}
         {pageType == 'M' && <button onClick={() => { setPageType('D'); }}>취소</button>}
         {pageType == 'M' && <button onClick={fnSave}>저장</button>}
+      </div>
+      <div>{reply.map(item => (
+        <Reply data={item}></Reply>
+      ))}
       </div>
     </div>
   );

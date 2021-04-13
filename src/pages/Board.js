@@ -42,8 +42,6 @@ function Board({history}) {
 
   return (
     <>
-    {/* page: {page} / totalCnt: {totalCnt} / pageCnt: {pageCnt} / pagiNation: ({pagiNation.prev?1:-1}){pagiNation.list}({pagiNation.next?1:-1})
-    <br/> */}
     <button className="btn" onClick={fnSearch}>조회</button>
     <Link to="/editor">글쓰기</Link>
     {/* 아래 select 따로 빼기 예정 */}
