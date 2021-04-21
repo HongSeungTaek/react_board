@@ -9,8 +9,8 @@ import Reply from '../component/Reply';
 function Detail({ location, history }) {
   let { boardId } = useParams();
   const [pageType, setPageType] = useState('D');
-  const [title, setTitle] = useState('');
-  const [content, setContent] = useState('');
+  const [title, setTitle] = useState();
+  const [content, setContent] = useState();
   let detail = {};
 
   const [reply, setReply] = useState([]);
@@ -28,7 +28,7 @@ function Detail({ location, history }) {
     });
   }
 
-  if(pageType == 'D') {
+  if(title == undefined && content == undefined) {
     getOne(); 
   }
 
