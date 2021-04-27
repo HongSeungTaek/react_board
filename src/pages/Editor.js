@@ -5,7 +5,8 @@ import axios from 'axios';
 import Const from '../Const';
 import CommonUtil from '../CommonUtil';
 
-function Editor({ location, history }) {
+function Editor({ data, history }) {
+  console.log(data);
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
 

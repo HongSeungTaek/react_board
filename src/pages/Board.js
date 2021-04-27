@@ -44,7 +44,6 @@ function Board({history}) {
     <>
     <button className="btn" onClick={fnSearch}>조회</button>
     <Link to="/editor">글쓰기</Link>
-    {/* 아래 select 따로 빼기 예정 */}
     <select onChange={(e) => setPageCnt(parseInt(e.target.value))}>
       {Const.PAGE_COUNT.map(item => (
         <option key={item} value={item}>{item}</option>
