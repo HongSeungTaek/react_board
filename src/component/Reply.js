@@ -10,7 +10,7 @@ function Reply({ data }) {
       axios.post('reply/del', {
         'replyId': replyId
       }).then(function(res) {
-        alert('삭제')
+        alert('삭제');
       });
     }
   }

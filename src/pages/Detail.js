@@ -13,14 +13,15 @@ function Detail({ location, history }) {
   const [content, setContent] = useState();
   let detail = {};
 
-  const [reply, setReply] = useState([]);
+  const [reply, setReply] = useState();
+  const [replyList, setReplyList] = useState([]);
 
   const getOne = () => {
     console.log(title);
     axios.get('board/'+boardId).then(function(res) {
       setTitle(res.data.data.title);
       setContent(res.data.data.content);
-      setReply(res.data.data.replyList);
+      setReplyList(res.data.data.replyList);
       detail = {
         'title': title,
         'content': content
@@ -52,7 +53,12 @@ function Detail({ location, history }) {
   }
   const fnAddReply = () => {
     if(window.confirm('댓글을 등록하시겠습니까?')) {
-      // axios.post('', {}).then(function(res) {});
+      axios.post('reply/add', {
+        'board_id': boardId,
+        'content': reply
+      }).then(function(res) {
+        history.push('/');
+      });
     }
   }
 
@@ -74,19 +80,19 @@ function Detail({ location, history }) {
           :<textarea value={content} onChange={({ target: { value }}) => setContent(value) }/>}
         </div>
         {/* {pageType == 'D' && <button onClick={() => { setPageType('M'); }}>수정</button>} */}
-        {pageType == 'D' && <button onClick={fnAddReply}>수정</button>}
+        {pageType == 'D' && <button onClick={() => { setPageType('M'); }}>수정</button>}
         {/* {pageType == 'D' && <button onClick={fnDelete}>삭제</button>}
         {pageType == 'M' && <button onClick={() => { setPageType('D'); }}>취소</button>}
         {pageType == 'M' && <button onClick={fnSave}>저장</button>} */}
       </div>
       {pageType == 'D' && 
       <div>
-        <textarea />
-        <button onClick={() => { setPageType('M'); }}>댓글달기</button>
+        <textarea value={reply} onChange={({ target: { value }}) => setReply(value) }/>
+        <button onClick={fnAddReply}>댓글달기</button>
       </div>
       }
       <div>
-        {reply.map(item => (
+        {replyList.map(item => (
           <Reply data={item}></Reply>
         ))}
       </div>
