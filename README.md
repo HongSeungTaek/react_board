@@ -14,5 +14,5 @@ https://github.com/HongSeungTaek/react_board_server
 - (100%) 리스트 출력
 - (100%) 페이징 구현
 - (100%) CRUD 구현
-- (70%) 댓글 구현
+- (100%) 댓글 구현
 - (0%) 검색 구현
