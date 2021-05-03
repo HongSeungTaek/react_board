@@ -6,6 +6,7 @@ import Const from '../Const';
 import CommonUtil from '../CommonUtil';
 
 function Board({history}) {
+  const [keyword, setKeyword] = useState('');
   const [page, setPage] = useState(1);
   const [totalCnt, setTotalCnt] = useState(0);
   const [pageCnt, setPageCnt] = useState(10);
@@ -20,7 +21,8 @@ function Board({history}) {
     let param = {
       'page': page,
       'pageCnt': pageCnt,
-      'offset': (page-1) * pageCnt
+      'offset': (page-1) * pageCnt,
+      'keyword': keyword
     };
 
     const response = await axios.post('board/list', param);
@@ -42,6 +44,7 @@ function Board({history}) {
 
   return (
     <>
+    <input type="text" value={keyword} onChange={({ target: { value }}) => setKeyword(value) }/>
     <button className="btn" onClick={fnSearch}>조회</button>
     <Link to="/editor">글쓰기</Link>
     <select onChange={(e) => setPageCnt(parseInt(e.target.value))}>
