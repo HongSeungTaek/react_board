@@ -81,8 +81,8 @@ function Detail({ location, history }) {
         </div>
         {/* {pageType == 'D' && <button onClick={() => { setPageType('M'); }}>수정</button>} */}
         {pageType == 'D' && <button onClick={() => { setPageType('M'); }}>수정</button>}
-        {/* {pageType == 'D' && <button onClick={fnDelete}>삭제</button>}
-        {pageType == 'M' && <button onClick={() => { setPageType('D'); }}>취소</button>}
+        {pageType == 'D' && <button onClick={fnDelete}>삭제</button>}
+        {/*pageType == 'M' && <button onClick={() => { setPageType('D'); }}>취소</button>}
         {pageType == 'M' && <button onClick={fnSave}>저장</button>} */}
       </div>
       {pageType == 'D' && 
