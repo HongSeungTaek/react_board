@@ -1,6 +1,9 @@
 import {useState, useEffect} from 'react';
 import { Route, Link } from 'react-router-dom';
 import axios from 'axios';
+import Button from 'react-bootstrap/Button';
+import FormControl from 'react-bootstrap/FormControl';
+
 
 import Const from '../Const';
 import CommonUtil from '../CommonUtil';
@@ -44,8 +47,12 @@ function Board({history}) {
 
   return (
     <>
-    <input type="text" value={keyword} onChange={({ target: { value }}) => setKeyword(value) }/>
-    <button className="btn" onClick={fnSearch}>조회</button>
+    <FormControl placeholder="검색어를 입력하십시오"
+      aria-label="Recipient's username"
+      aria-describedby="basic-addon2"
+      value={keyword} onChange={({ target: { value }}) => setKeyword(value) }
+    />
+    <Button variant="primary" onClick={fnSearch}>조회</Button>
     <Link to="/editor">글쓰기</Link>
     <select onChange={(e) => setPageCnt(parseInt(e.target.value))}>
       {Const.PAGE_COUNT.map(item => (
