@@ -3,6 +3,8 @@ import { Route, Link } from 'react-router-dom';
 import axios from 'axios';
 
 import { Form, FormControl, Button, Selection, Pagination } from 'react-bootstrap';
+import 'tui-grid/dist/tui-grid.css';
+import Grid from '@toast-ui/react-grid';
 
 import '../common.css';
 import Const from '../Const';
@@ -19,6 +21,13 @@ function Board({history}) {
     'next': false
   });
   const [list, setList] = useState([]);
+  
+  const columns = [
+    {name: 'boardId', header: 'No'},
+    {name: 'title', header: '제목'},
+    {name: 'content', header: '내용'},
+    {name: 'insertDate', header: '만든날짜'}
+  ];
 
   const fnSearch = async () => {
     let param = {
@@ -37,20 +46,9 @@ function Board({history}) {
     setPagiNation(_pagination);
   };
 
-  const fnDetail = (boardId) => {
-    history.push('/detail/'+boardId);
+  const fnDetail = (rowKey) => {
+    history.push('/detail/'+list[rowKey].boardId);
   }
-
-  const data = [
-    {id: 1, name: 'Editor'},
-    {id: 2, name: 'Grid'},
-    {id: 3, name: 'Chart'}
-  ];
-  
-  const columns = [
-    {name: 'id', header: 'ID'},
-    {name: 'name', header: 'Name'}
-  ];
 
   useEffect(()=>{
     fnSearch();
@@ -72,37 +70,18 @@ function Board({history}) {
       </select>
     </div>
     <Link to="/editor">글쓰기</Link>
-
-    <table>
-      <thead>
-        <tr>
-          <th>No</th>
-          <th>제목</th>
-          <th>내용</th>
-          <th>만든날짜</th>
-        </tr>
-      </thead>
-      <tbody>
-        {list.map(item => (
-          <BoardItem data={item} fnDetail={fnDetail} key={item.boardId}/>
-        ))}
-      </tbody>
-    </table>
+    <Grid
+      data={list}
+      columns={columns}
+      rowHeight={30}
+      bodyHeight={500}
+      rowHeaders={['rowNum']}
+      onClick={(data) => fnDetail(data.rowKey)}
+    />
     <div className="pagination-box">
       <BoardPagiNation pagiNation={pagiNation} setPage={setPage}/>
     </div>
     </>
-  );
-}
-
-function BoardItem({data,fnDetail}) {
-  return (
-    <tr onClick={() => fnDetail(data.boardId)}>
-      <td>{data.boardId}</td>
-      <td>{data.title}</td>
-      <td>{data.content}</td>
-      <td>{data.insertDate}</td>
-    </tr>
   );
 }
 
