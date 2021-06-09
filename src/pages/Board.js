@@ -1,10 +1,10 @@
 import {useState, useEffect} from 'react';
 import { Route, Link } from 'react-router-dom';
 import axios from 'axios';
-import Button from 'react-bootstrap/Button';
-import FormControl from 'react-bootstrap/FormControl';
 
+import { Form, FormControl, Button, Selection, Pagination } from 'react-bootstrap';
 
+import '../common.css';
 import Const from '../Const';
 import CommonUtil from '../CommonUtil';
 
@@ -41,24 +41,38 @@ function Board({history}) {
     history.push('/detail/'+boardId);
   }
 
+  const data = [
+    {id: 1, name: 'Editor'},
+    {id: 2, name: 'Grid'},
+    {id: 3, name: 'Chart'}
+  ];
+  
+  const columns = [
+    {name: 'id', header: 'ID'},
+    {name: 'name', header: 'Name'}
+  ];
+
   useEffect(()=>{
     fnSearch();
   }, [page]);
 
   return (
     <>
-    <FormControl placeholder="검색어를 입력하십시오"
-      aria-label="Recipient's username"
-      aria-describedby="basic-addon2"
-      value={keyword} onChange={({ target: { value }}) => setKeyword(value) }
-    />
-    <Button variant="primary" onClick={fnSearch}>조회</Button>
+    <div>
+      <FormControl className="input-xl dib vt"
+        placeholder="검색어를 입력하십시오"
+        value={keyword} onChange={({ target: { value }}) => setKeyword(value) }
+      />
+    
+      <Button variant="primary" onClick={fnSearch}>조회</Button>
+      <select onChange={(e) => setPageCnt(parseInt(e.target.value))}>
+        {Const.PAGE_COUNT.map(item => (
+          <option key={item} value={item}>{item}</option>
+        ))}
+      </select>
+    </div>
     <Link to="/editor">글쓰기</Link>
-    <select onChange={(e) => setPageCnt(parseInt(e.target.value))}>
-      {Const.PAGE_COUNT.map(item => (
-        <option key={item} value={item}>{item}</option>
-      ))}
-    </select>
+
     <table>
       <thead>
         <tr>
@@ -74,7 +88,9 @@ function Board({history}) {
         ))}
       </tbody>
     </table>
-    <PagiNation pagiNation={pagiNation} setPage={setPage}/>
+    <div className="pagination-box">
+      <BoardPagiNation pagiNation={pagiNation} setPage={setPage}/>
+    </div>
     </>
   );
 }
@@ -90,17 +106,22 @@ function BoardItem({data,fnDetail}) {
   );
 }
 
-function PagiNation({pagiNation, setPage}) {
+function BoardPagiNation({pagiNation, setPage}) {
   return (
-    <ul>
-      {pagiNation.prev && <li onClick={()=>setPage(pagiNation.prevValue)}><a href="#!">prev</a></li>}
+    <Pagination>
+      {pagiNation.prev &&
+        <Pagination.Prev onClick={()=>setPage(pagiNation.prevValue)}></Pagination.Prev>}
       
       {pagiNation.list.map(item => (
-        <li key={item} onClick={()=>setPage(item)}><a href="#!">{item}</a></li>
+        <Pagination.Item key={item} onClick={()=>setPage(item)}
+          active={item === pagiNation.currentPage}>
+          {item}
+        </Pagination.Item>
       ))}
-      
-      {pagiNation.next && <li onClick={()=>setPage(pagiNation.nextValue)}><a href="#!">next</a></li>}
-    </ul>
+
+      {pagiNation.next &&
+        <Pagination.Next onClick={()=>setPage(pagiNation.nextValue)}></Pagination.Next>}
+    </Pagination>
   );
 }
 

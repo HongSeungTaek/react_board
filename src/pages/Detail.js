@@ -17,7 +17,6 @@ function Detail({ location, history }) {
   const [replyList, setReplyList] = useState([]);
 
   const getOne = () => {
-    console.log(title);
     axios.get('board/'+boardId).then(function(res) {
       setTitle(res.data.data.title);
       setContent(res.data.data.content);

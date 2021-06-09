@@ -41,3 +41,8 @@
 .content .list table {
   width: 100%;
 }
+
+.content .list .pagination-box ul {
+  justify-content: center;
+}
+

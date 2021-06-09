@@ -10,7 +10,7 @@ const CommonUtil = {
     for(var i=0; i<Const.PAGINATION_COUNT && start+i <= lastPage; i++) {
       list.push(start+i);
     }
-
+    _pagination.currentPage = page;
     _pagination.prev = (page > Const.PAGINATION_COUNT);
     _pagination.prevValue = list[0]-1;
     _pagination.list = list;

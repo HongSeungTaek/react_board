@@ -15,7 +15,6 @@ function Editor({ data, history }) {
       'title': title,
       'content': content.replace(/(?:\r\n|\r|\n)/g, '<br/>')
     };
-    console.log(param);
     const res = await axios.post('board/add', param);
     if(res.data.resCode == 1) {
       alert('등록완료');
