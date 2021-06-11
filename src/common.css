@@ -1,0 +1,10 @@
+.dib { display: inline-block; }
+
+.vt { vertical-align: top; }
+.vm { vertical-align: middle; }
+
+.input-xs { width: 100px; }
+.input-s { width: 120px; }
+.input-m { width: 150px; }
+.input-l { width: 200px; }
+.input-xl { width: 350px; }

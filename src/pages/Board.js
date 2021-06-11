@@ -3,8 +3,6 @@ import { Route, Link } from 'react-router-dom';
 import axios from 'axios';
 
 import { Form, FormControl, Button, Selection, Pagination } from 'react-bootstrap';
-import 'tui-grid/dist/tui-grid.css';
-import Grid from '@toast-ui/react-grid';
 
 import '../common.css';
 import Const from '../Const';
@@ -22,13 +20,6 @@ function Board({history}) {
   });
   const [list, setList] = useState([]);
   
-  const columns = [
-    {name: 'boardId', header: 'No'},
-    {name: 'title', header: '제목'},
-    {name: 'content', header: '내용'},
-    {name: 'insertDate', header: '만든날짜'}
-  ];
-
   const fnSearch = async () => {
     let param = {
       'page': page,
@@ -38,7 +29,7 @@ function Board({history}) {
     };
 
     const response = await axios.post('board/list', param);
-
+    
     setList(response.data.list);
     setTotalCnt(response.data.totalCnt);
     
@@ -46,8 +37,8 @@ function Board({history}) {
     setPagiNation(_pagination);
   };
 
-  const fnDetail = (rowKey) => {
-    history.push('/detail/'+list[rowKey].boardId);
+  const fnDetail = (boardId) => {
+    history.push('/detail/'+boardId);
   }
 
   useEffect(()=>{
@@ -61,7 +52,6 @@ function Board({history}) {
         placeholder="검색어를 입력하십시오"
         value={keyword} onChange={({ target: { value }}) => setKeyword(value) }
       />
-    
       <Button variant="primary" onClick={fnSearch}>조회</Button>
       <select onChange={(e) => setPageCnt(parseInt(e.target.value))}>
         {Const.PAGE_COUNT.map(item => (
@@ -70,18 +60,42 @@ function Board({history}) {
       </select>
     </div>
     <Link to="/editor">글쓰기</Link>
-    <Grid
-      data={list}
-      columns={columns}
-      rowHeight={30}
-      bodyHeight={500}
-      rowHeaders={['rowNum']}
-      onClick={(data) => fnDetail(data.rowKey)}
-    />
+
+    <table className="data-grid">
+      <colgroup width="100"/>
+      <colgroup width="250"/>
+      <colgroup/>
+      <colgroup width="200"/>
+      <thead>
+        <tr>
+          <th>No</th>
+          <th>제목</th>
+          <th>내용</th>
+          <th>만든날짜</th>
+        </tr>
+      </thead>
+      <tbody>
+        {list.map(item => (
+          <BoardItem data={item} fnDetail={fnDetail} key={item.boardId}/>
+        ))}
+      </tbody>
+    </table>
+
     <div className="pagination-box">
       <BoardPagiNation pagiNation={pagiNation} setPage={setPage}/>
     </div>
     </>
+  );
+}
+
+function BoardItem({data,fnDetail}) {
+  return (
+    <tr onClick={() => fnDetail(data.boardId)}>
+      <td>{data.boardId}</td>
+      <td>{data.title}</td>
+      <td>{data.content}</td>
+      <td>{data.insertDate}</td>
+    </tr>
   );
 }
 
