@@ -68,10 +68,10 @@ function Board({history}) {
       <colgroup width="200"/>
       <thead>
         <tr>
-          <th>No</th>
-          <th>제목</th>
-          <th>내용</th>
-          <th>만든날짜</th>
+          <th><div>No</div></th>
+          <th><div>제목</div></th>
+          <th><div>내용</div></th>
+          <th><div>만든날짜</div></th>
         </tr>
       </thead>
       <tbody>
@@ -91,10 +91,10 @@ function Board({history}) {
 function BoardItem({data,fnDetail}) {
   return (
     <tr onClick={() => fnDetail(data.boardId)}>
-      <td>{data.boardId}</td>
-      <td>{data.title}</td>
-      <td>{data.content}</td>
-      <td>{data.insertDate}</td>
+      <td><div>{data.boardId}</div></td>
+      <td><div>{data.title}</div></td>
+      <td><div>{data.content}</div></td>
+      <td><div>{data.insertDate}</div></td>
     </tr>
   );
 }

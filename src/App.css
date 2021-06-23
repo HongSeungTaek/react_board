@@ -32,11 +32,13 @@
   padding-top: 60px;
   border: 1px solid red;
   height: 800px;
+  color: #5a5a5a;
 }
 .content .list {
   margin: auto;
   width: 1200px;
   border: 1px solid blue;
+  padding: 20px;
 }
 
 .content .list .pagination-box ul {
@@ -45,5 +47,32 @@
 
 .data-grid {
   width: 100%;
+  border: 1px solid #465A72;
 }
 
+.data-grid tr {
+  height: 35px;
+}
+
+.data-grid thead tr {
+  background-color: #5E728A;
+  color: #fff;
+}
+
+.data-grid thead th {
+  border-right: 1px solid #465A72;
+}
+
+.data-grid tbody tr:not(:last-child) {
+  border-bottom: 1px solid #efefef;
+}
+
+.data-grid tbody tr:hover {
+  background-color: #efefef;
+  cursor: pointer;
+}
+
+.data-grid thead th div,
+.data-grid tbody td div {
+  padding: 0 10px;
+}
