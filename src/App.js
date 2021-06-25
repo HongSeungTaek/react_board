@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import React, { Component } from 'react';
 import { Route } from 'react-router-dom';
 
-import { Board, Editor, Detail } from './pages';
+import { Login, Board, Editor, Detail } from './pages';
 import MenuList from './Menu';
 import axios from 'axios';
 
@@ -12,9 +12,10 @@ function App() {
 
   return (
     <div className="App">
-      <SideBar/>
+      <Login/>
+      {/* <SideBar/>
       <Nav/>
-      <Content/>
+      <Content/> */}
     </div>
   );
 }

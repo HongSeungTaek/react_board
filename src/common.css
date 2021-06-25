@@ -8,3 +8,5 @@
 .input-m { width: 150px; }
 .input-l { width: 200px; }
 .input-xl { width: 350px; }
+
+.input-control { border-radius: 5px; padding:5px; }
