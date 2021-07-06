@@ -1,4 +1,4 @@
-import Const from './Const';
+import Const from '../common/Const';
 
 function MenuList() {
   let menuList = [];

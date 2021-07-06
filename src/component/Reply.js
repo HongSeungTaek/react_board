@@ -1,8 +1,4 @@
-import {useState, useEffect} from 'react';
 import axios from 'axios';
-
-import Const from '../Const';
-import CommonUtil from '../CommonUtil';
 
 function Reply({ data }) {
   const fndelReply = (replyId) => {

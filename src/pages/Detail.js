@@ -1,9 +1,7 @@
 import {useState, useEffect} from 'react';
-import { Route, Link, useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import axios from 'axios';
 
-import Const from '../Const';
-import CommonUtil from '../CommonUtil';
 import Reply from '../component/Reply';
 
 function Detail({ location, history }) {

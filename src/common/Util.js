@@ -1,5 +1,5 @@
 import Const from './Const';
-const CommonUtil = {
+const Util = {
 
   createPagination(page, totalCnt, pageCnt) {
     let _pagination = {};
@@ -22,4 +22,4 @@ const CommonUtil = {
 
 }
 
-export default CommonUtil;
+export default Util;

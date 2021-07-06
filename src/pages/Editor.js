@@ -1,9 +1,6 @@
 import {useState, useEffect} from 'react';
-import { Route, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
-
-import Const from '../Const';
-import CommonUtil from '../CommonUtil';
 
 function Editor({ data, history }) {
   console.log(data);
