@@ -1,19 +1,27 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
+import reportWebVitals from './reportWebVitals';
+import { createStore, applyMiddleware, compose } from 'redux';
+import { Provider } from 'react-redux';
+
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 import './css/index.css';
 import './css/App.css';
 import './css/common.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
+import rootReducer from "./reducers";
 
-import 'bootstrap/dist/css/bootstrap.min.css';
-
+// 위에서 만든 reducer를 스토어 만들때 넣어줍니다
+const store = createStore(rootReducer);
 
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter>
-      <App />
+      <Provider store={store}>
+        <App />
+      </Provider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById('root')
